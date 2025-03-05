@@ -32,7 +32,7 @@ public class PassThePig {
                         rolling = false;
                     } else {
                         handScore += roll;
-                        System.out.println(p.getName() + " rolls a " + getStringForScore(roll1) + "and a " + getStringForScore(roll2) + "for a roll of " + roll);
+                        System.out.println(p.getName() + " rolls a " + getStringForScore(roll1) + " and a " + getStringForScore(roll2) + "for a roll of " + roll);
                     }
                     ArrayList<Integer> otherScores = getOtherScores(players, p);
                     rolling = p.wantsToRoll(p.getScore(), handScore, otherScores, winningScore);
