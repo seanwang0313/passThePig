@@ -1,0 +1,22 @@
+public class SchemerBot extends Player{
+    public SchemerBot (String n, String s) {
+        name = n;
+        strategy = s;
+    }
+
+     public boolean wantsToRoll(int myScore, int handScore, ArrayList<Integer> otherScores, int winningScore) {
+        if (myScore + handScore > winningScore) {
+            return false; // if bot can win, stop rolling
+        }
+
+        if (handScore > 30) {
+            return false; // to stop bot for being too greedy
+        }
+
+        for (int opponentScores : otherScores) {
+            if (opponentScores > 80) {
+                return true; // if opponent is close to winning, keep rolling to get more points
+            }
+        }
+    }
+}
