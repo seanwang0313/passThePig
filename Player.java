@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Player {
     private String name;
     private String strategy;
@@ -6,16 +8,17 @@ public class Player {
     public Player(String name, String strategy) {
         this.name = name;
         this.strategy = strategy;
-        this.score = 0;
     }
 
-    public boolean wantsToRoll(int myScore, int handScore, ArrayList<Integer> otherScores, int winningScore);
+    public boolean wantsToRoll(int myScore, int handScore, ArrayList<Integer> otherScores, int winningScore){
+        return true;
+    }
     
     public String getName() {
         return name;
     }
 
-    public int getScore(){
+    public int getScore() {
         return score;
     }
 

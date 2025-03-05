@@ -1,7 +1,8 @@
+import java.util.ArrayList;
+
 public class SimpleBot extends Player{
-    public SimpleBot (String n, String s) {
-        name = n;
-        strategy = s;
+    public SimpleBot (String n) {
+        super(n, "simple strategy");
     }
 
      public boolean wantsToRoll(int myScore, int handScore, ArrayList<Integer> otherScores, int winningScore) {

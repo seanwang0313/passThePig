@@ -1,7 +1,8 @@
+import java.util.ArrayList;
+
 public class RiskyBot extends Player{
-    public RiskyBot (String n, String s) {
-        name = n;
-        strategy = s;
+    public RiskyBot (String n) {
+        super(n, "takes risks");
     }
 
      public boolean wantsToRoll(int myScore, int handScore, ArrayList<Integer> otherScores, int winningScore) {
