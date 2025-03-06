@@ -9,10 +9,10 @@ public class PassThePig {
 
         // initialize players and add them to players array list
         players.add(new HumanPlayer("You"));
-        players.add(new RiskyBot("RiskyBot"));
-        players.add(new SimpleBot("SimpleBot"));
-        players.add(new WimpyBot("WimpyBot"));
-        players.add(new SchemerBot("SchemerBot"));
+        players.add(new RiskyBotSean("RiskyBot"));
+        players.add(new SimpleBotSean("SimpleBot"));
+        players.add(new WimpyBotSean("WimpyBot"));
+        players.add(new SchemerBotSean("SchemerBot"));
 
         final int WINNING_SCORE = 100;
         boolean gameOn = true;
@@ -23,13 +23,13 @@ public class PassThePig {
                 p.addScore(handScore);
                 System.out.println(p.getName() + " banks " + handScore + " points! Total: " + p.getScore());
 
-                if (p.getScore() >= WINNING_SCORE) {
+                if (p.getScore() >= WINNING_SCORE) { // if win
                     gameOn = false;
                     System.out.println("Game over! " + p.getName() + " wins with score: " + p.getScore() + " !" + " His strategy was " + p.getStrategy());
                     break; //stop checking the remaining players in for loop and immediately ending game as gameOn is false
                 }
             }
-            System.out.println(getAllScores());
+            System.out.println(getAllScores()); // print out all scores across the board
         }
     }
     
@@ -49,15 +49,15 @@ public class PassThePig {
             String roll1 = getRoll();
             String roll2 = getRoll();
             int roll = getScore(roll1, roll2);
-            if (roll == 0) {
+            if (roll == 0) { // pig out
                 System.out.println(p.getName() + " got a pig out!");
                 return 0;
             } else {
                 handScore += roll;
                 System.out.println(p.getName() + " rolls a " + roll1 + " and a " + roll2 + " for a roll of " + roll + ". Total point: " + p.getScore());
                 }
-            ArrayList<Integer> otherScores = getOtherScores(players, p);
-            rolling = p.wantsToRoll(p.getScore(), handScore, otherScores, WINNING_SCORE);
+            ArrayList<Integer> otherScores = getOtherScores(players, p); // update otherScores
+            rolling = p.wantsToRoll(p.getScore(), handScore, otherScores, WINNING_SCORE); // determine if want to keep rolling
         }
         return handScore;
     }
@@ -79,7 +79,7 @@ public class PassThePig {
             }
         }
 
-        if (rollScore(roll1)>rollScore(roll2)) {
+        if (rollScore(roll1)>rollScore(roll2)) { // return higher score if the rolls are not the same
             return rollScore(roll1);
         }
         return rollScore(roll2);
@@ -116,7 +116,7 @@ public class PassThePig {
         ArrayList <Integer> scores = new ArrayList<>();
 
         for (Player player: Players) {
-            if (player != current) {
+            if (player != current) { // make sure the player's own score is not added to the other scores
                 scores.add(player.getScore());
             }
         }

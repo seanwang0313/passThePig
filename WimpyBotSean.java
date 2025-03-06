@@ -1,12 +1,12 @@
 import java.util.ArrayList;
 
-public class RiskyBot extends Player{
-    public RiskyBot (String n) {
+public class WimpyBotSean extends Player{
+    public WimpyBotSean (String n) {
         super(n);
-        setStrategy("takes risks");
+        setStrategy("play safe");
     }
 
      public boolean wantsToRoll(int myScore, int handScore, ArrayList<Integer> otherScores, int winningScore) {
-        return handScore < 40; // risky strategy
+        return handScore < 10; // plays very cautiously
     }
 }

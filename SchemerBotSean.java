@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
-public class SchemerBot extends Player{
-    public SchemerBot (String n) {
+public class SchemerBotSean extends Player{
+    public SchemerBotSean (String n) {
         super(n);
         setStrategy("plays with strategy");
     }
