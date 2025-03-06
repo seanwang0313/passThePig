@@ -29,7 +29,16 @@ public class PassThePig {
                     break; //stop checking the remaining players in for loop and immediately ending game as gameOn is false
                 }
             }
+            System.out.println(getAllScores());
         }
+    }
+    
+    public static String getAllScores(){
+        String allScores = "Score table: |";
+        for (Player p : players) {
+            allScores += (p.getName() + ": " + p.getScore() + "|");
+        }
+        return allScores;
     }
     
     public static int playTurn(Player p, int WINNING_SCORE) {

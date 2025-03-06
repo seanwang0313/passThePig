@@ -11,7 +11,7 @@ public class SchemerBot extends Player{
             return false; // if bot can win, stop rolling
         }
 
-        if (handScore > 30) {
+        if (handScore > 23) { // Shawn did trial and errrors and suggested 23 as the threshold to me
             return false; // to stop bot for being too greedy
         }
 
