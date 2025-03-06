@@ -19,35 +19,38 @@ public class PassThePig {
 
         while (gameOn) {
             for (Player p : players) {
-                int handScore = 0;
-                boolean rolling = true;
-
-                while (rolling) {
-                    String roll1 = getRoll();
-                    String roll2 = getRoll();
-                    int roll = getScore(roll1, roll2);
-                    if (roll == 0) {
-                        System.out.println(p.getName() + " got a pig out!");
-                        handScore = 0;
-                        rolling = false;
-                        break;
-                    } else {
-                        handScore += roll;
-                        System.out.println(p.getName() + " rolls a " + roll1 + " and a " + roll2 + " for a roll of " + roll);
-                    }
-                    ArrayList<Integer> otherScores = getOtherScores(players, p);
-                    rolling = p.wantsToRoll(p.getScore(), handScore, otherScores, WINNING_SCORE);
-                }
+                int handScore = playTurn(p, WINNING_SCORE);
                 p.addScore(handScore);
                 System.out.println(p.getName() + " banks " + handScore + " points! Total: " + p.getScore());
 
                 if (p.getScore() >= WINNING_SCORE) {
                     gameOn = false;
                     System.out.println("Game over! " + p.getName() + " wins with score: " + p.getScore() + " !" + " His strategy was " + p.getStrategy());
-                    break;
+                    break; //stop checking the remaining players in for loop and immediately ending game as gameOn is false
                 }
             }
         }
+    }
+    
+    public static int playTurn(Player p, int WINNING_SCORE) {
+        int handScore = 0;
+        boolean rolling = true;
+
+        while (rolling) {
+            String roll1 = getRoll();
+            String roll2 = getRoll();
+            int roll = getScore(roll1, roll2);
+            if (roll == 0) {
+                System.out.println(p.getName() + " got a pig out!");
+                return 0;
+            } else {
+                handScore += roll;
+                System.out.println(p.getName() + " rolls a " + roll1 + " and a " + roll2 + " for a roll of " + roll + ". Total point: " + p.getScore());
+                }
+            ArrayList<Integer> otherScores = getOtherScores(players, p);
+            rolling = p.wantsToRoll(p.getScore(), handScore, otherScores, WINNING_SCORE);
+        }
+        return handScore;
     }
 
     public static int getScore(String roll1,  String roll2) {
