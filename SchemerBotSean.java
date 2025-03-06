@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class SchemerBotSean extends Player{
     public SchemerBotSean (String n) {
         super(n);
-        setStrategy("plays with strategy");
+        strategy = "plays with strategy";
     }
 
      public boolean wantsToRoll(int myScore, int handScore, ArrayList<Integer> otherScores, int winningScore) {

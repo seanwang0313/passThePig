@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class WimpyBotSean extends Player{
     public WimpyBotSean (String n) {
         super(n);
-        setStrategy("play safe");
+        strategy = "play safe";
     }
 
      public boolean wantsToRoll(int myScore, int handScore, ArrayList<Integer> otherScores, int winningScore) {

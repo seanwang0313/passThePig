@@ -5,7 +5,7 @@ public class HumanPlayer extends Player{
     private Scanner sc;
     public HumanPlayer(String n) {
         super(n);
-        setStrategy("human");
+        strategy ="human";
         this.sc = new Scanner(System.in);
     }
 
