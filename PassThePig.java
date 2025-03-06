@@ -8,13 +8,13 @@ public class PassThePig {
         System.out.println("Welcome to Pass the Pigs!");
 
         // initialize players and add them to players array list
-        players.add(new HumanPlayer("You", sc));
+        players.add(new HumanPlayer("You"));
         players.add(new RiskyBot("RiskyBot"));
         players.add(new SimpleBot("SimpleBot"));
         players.add(new WimpyBot("WimpyBot"));
         players.add(new SchemerBot("SchemerBot"));
 
-        int winningScore = 100;
+        final int WINNING_SCORE = 100;
         boolean gameOn = true;
 
         while (gameOn) {
@@ -23,88 +23,78 @@ public class PassThePig {
                 boolean rolling = true;
 
                 while (rolling) {
-                    int roll1 = getRoll();
-                    int roll2 = getRoll();
+                    String roll1 = getRoll();
+                    String roll2 = getRoll();
                     int roll = getScore(roll1, roll2);
                     if (roll == 0) {
                         System.out.println(p.getName() + " got a pig out!");
                         handScore = 0;
                         rolling = false;
+                        break;
                     } else {
                         handScore += roll;
-                        System.out.println(p.getName() + " rolls a " + getStringForScore(roll1) + " and a " + getStringForScore(roll2) + "for a roll of " + roll);
+                        System.out.println(p.getName() + " rolls a " + roll1 + " and a " + roll2 + " for a roll of " + roll);
                     }
                     ArrayList<Integer> otherScores = getOtherScores(players, p);
-                    rolling = p.wantsToRoll(p.getScore(), handScore, otherScores, winningScore);
+                    rolling = p.wantsToRoll(p.getScore(), handScore, otherScores, WINNING_SCORE);
                 }
                 p.addScore(handScore);
                 System.out.println(p.getName() + " banks " + handScore + " points! Total: " + p.getScore());
 
-                if (p.getScore() >= winningScore) {
+                if (p.getScore() >= WINNING_SCORE) {
                     gameOn = false;
-                    System.out.println("Game over! " + p.getName() + "wins with score: " + p.getScore() + " !");
+                    System.out.println("Game over! " + p.getName() + " wins with score: " + p.getScore() + " !" + " His strategy was " + p.getStrategy());
+                    break;
                 }
             }
         }
     }
 
-    public static String getStringForScore(int i) {
-        if (i == 1) {
-            return "dot";
-        } else if (i == 2) {
-            return "no dot";
-        } else if (i == 3) {
-            return "razorback";
-        } else if (i == 4) {
-            return "trotter";
-        } else if (i == 6) {
-            return "snouter";
-        }
-        return "leaning jowler";
-    }
-
-    public static int getScore(int roll1,  int roll2) {
-        if ((roll1 == 1 && roll2 == 2) || (roll2 == 1 && roll1 == 2)) {
+    public static int getScore(String roll1,  String roll2) {
+        if ((roll1.equals("dot") && roll2.equals("no dot")) || (roll2.equals("dot") && roll1.equals("no dot"))) {
             return 0; // pig out
         }
 
-        if (roll1 == roll2) {
-            if (roll1 == 1 || roll1 == 2) {
+        if (roll1.equals(roll2)) {
+            if (roll1.equals("dot") || roll1.equals("no dot")) {
                 return 1; // double for dot or no dot
-            } else if (roll1 == 3 || roll1 == 4) {
+            } else if (roll1.equals("razorback") || roll1.equals("trotter")) {
                 return 20; // double for razorback or trotter
-            } else if (roll1 == 5) {
+            } else if (roll1.equals("snouter")) {
                 return 40; // double for snouter
             } else {
                 return 60; // double for leaning jowler
             }
         }
 
-        return rollScore(roll1) + rollScore(roll2); // get score if different results
+        if (rollScore(roll1)>rollScore(roll2)) {
+            return rollScore(roll1);
+        }
+        return rollScore(roll2);
     }
 
-    public static int getRoll() {
+    public static String getRoll() {
         double roll = Math.random() * 100;
         if (roll < 34.9) {
-            return 1; // dot
+            return "dot"; // dot
         } else if (roll < 65.1) {
-            return 2; // no dot
+            return "no dot"; // no dot
         } else if (roll < 87.5) {
-            return 3; // razorback
+            return "razorback"; // razorback
         } else if (roll < 96.3) {
-            return 4; // trotter
+            return "trotter"; // trotter
         } else if (roll < 99.3) {
-            return 5; // snouter
+            return "snouter"; // snouter
         } 
-        return 6; // leaning jowler
+        return "jowler"; // leaning jowler
     }
 
-    public static int rollScore(int roll) {
-        if (roll == 1 || roll == 2) {
+    public static int rollScore(String roll) {
+        if (roll.equals("dot") || roll.equals("no dot")) {
             return 1; // dot or no dot
-        } else if (roll == 3 || roll == 4) {
+        } else if (roll.equals("razorback") || roll.equals("trotter")) {
             return 5; // razorback or trotter
-        } else if (roll == 5) {
+        } else if (roll.equals("snouter")) {
             return 10; // snouter
         } 
         return 15; // leaning jowler

@@ -3,9 +3,10 @@ import java.util.ArrayList;
 
 public class HumanPlayer extends Player{
     private Scanner sc;
-    public HumanPlayer(String n, Scanner scanner) {
-        super(n, "human");
-        this.sc = scanner;
+    public HumanPlayer(String n) {
+        super(n);
+        setStrategy("human");
+        this.sc = new Scanner(System.in);
     }
 
     public boolean wantsToRoll(int myScore, int handScore, ArrayList<Integer> otherScores, int winningScore) {

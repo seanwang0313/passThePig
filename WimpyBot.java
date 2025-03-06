@@ -2,7 +2,8 @@ import java.util.ArrayList;
 
 public class WimpyBot extends Player{
     public WimpyBot (String n) {
-        super(n, "play safe");
+        super(n);
+        setStrategy("play safe");
     }
 
      public boolean wantsToRoll(int myScore, int handScore, ArrayList<Integer> otherScores, int winningScore) {

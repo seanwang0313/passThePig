@@ -2,15 +2,21 @@ import java.util.ArrayList;
 
 public class Player {
     private String name;
-    private String strategy;
+    private String strategy = "";
     private int score;
 
-    public Player(String name, String strategy) {
+    public Player(String name) {
         this.name = name;
-        this.strategy = strategy;
     }
 
-    public boolean wantsToRoll(int myScore, int handScore, ArrayList<Integer> otherScores, int winningScore){
+    public void setStrategy(String s) {
+        this.strategy = s;
+    }
+
+    public boolean wantsToRoll(int myScore, int handScore, ArrayList<Integer> otherScores, int WINNINGSCORE){
+        if (myScore + handScore > WINNINGSCORE) {
+            return false;
+        }
         return true;
     }
     

@@ -2,7 +2,8 @@ import java.util.ArrayList;
 
 public class SchemerBot extends Player{
     public SchemerBot (String n) {
-        super(n, "plays with strategy");
+        super(n);
+        setStrategy("plays with strategy");
     }
 
      public boolean wantsToRoll(int myScore, int handScore, ArrayList<Integer> otherScores, int winningScore) {
