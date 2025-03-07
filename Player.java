@@ -10,7 +10,7 @@ public class Player {
     }
 
     public boolean wantsToRoll(int myScore, int handScore, ArrayList<Integer> otherScores, int WINNINGSCORE){
-        if (myScore + handScore > WINNINGSCORE) {
+        if (myScore + handScore > WINNINGSCORE) { // if can win, don't roll
             return false;
         }
         return true;
